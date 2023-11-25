@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cp_groceries/common_widget/line_textfield.dart';
 import 'package:cp_groceries/view/home/home_view.dart';
-import 'package:cp_groceries/view/main_tabview/main_tabview.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +45,7 @@ class _SignUpViewState extends State<SignUpView> {
             context, MaterialPageRoute(builder: (context) => const HomeView()));
       }
     } catch (e) {
+      // ignore: avoid_print
       print("Error: ${e.toString()}");
       return;
     }

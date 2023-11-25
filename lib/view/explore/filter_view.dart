@@ -13,6 +13,7 @@ class FilterView extends StatefulWidget {
 
 class _FilterViewState extends State<FilterView> {
   @override
+  // ignore: override_on_non_overriding_member
   List selectArr = [];
 
   List filterCatArr = [

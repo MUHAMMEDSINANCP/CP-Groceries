@@ -17,8 +17,7 @@ class LoginViewModel extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
-    super.onInit();
+     super.onInit();
     if (kDebugMode) {
       print("LoginViewModel Init ");
     }
