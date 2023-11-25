@@ -49,10 +49,12 @@ class ProductCell extends StatelessWidget {
             const Spacer(),
             Text(
               pObj["name"],
+              maxLines: 2,
               style: TextStyle(
                 color: TColor.primaryText,
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             const SizedBox(

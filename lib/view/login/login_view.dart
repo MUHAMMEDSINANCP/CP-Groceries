@@ -1,4 +1,5 @@
 import 'package:cp_groceries/view/login/sign_up_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +17,26 @@ class LogInView extends StatefulWidget {
 }
 
 class _LogInViewState extends State<LogInView> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  Future<void> login() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+      return;
+    }
+    if (mounted) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const MainTabView()));
+    }
+  }
+
   final loginVM = Get.put(LoginViewModel());
 
   @override
@@ -90,7 +111,8 @@ class _LogInViewState extends State<LogInView> {
                       height: media.width * 0.1,
                     ),
                     LineTextField(
-                      controller: loginVM.txtEmail.value,
+                      controller: emailController,
+                      // controller: loginVM.txtEmail.value,
                       title: "Email",
                       placeholder: "Enter your email address",
                       keyboardType: TextInputType.emailAddress,
@@ -100,7 +122,8 @@ class _LogInViewState extends State<LogInView> {
                     ),
                     Obx(
                       () => LineTextField(
-                        controller: loginVM.txtPassword.value,
+                        controller: passwordController,
+                        // controller: loginVM.txtPassword.value,
                         title: "Password",
                         placeholder: "Enter your password",
                         obscreText: !loginVM.isShowPassword.value,
@@ -141,13 +164,7 @@ class _LogInViewState extends State<LogInView> {
                       onPressed: () {
                         // when using api call use  the below command section
                         // loginVM.serviceCallLogin();
-
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MainTabView(),
-                          ),
-                        );
+                        login;
                       },
                     ),
                     SizedBox(

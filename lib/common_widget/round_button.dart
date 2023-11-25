@@ -12,7 +12,7 @@ class RoundButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: onPressed,
-      height: 60,
+      height: 50,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(19)),
       minWidth: double.maxFinite,
       elevation: 0.1,
@@ -42,7 +42,7 @@ class RoundIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: onPressed,
-      height: 60,
+      height: 50,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(19)),
       minWidth: double.maxFinite,
       elevation: 0.1,
@@ -56,12 +56,16 @@ class RoundIconButton extends StatelessWidget {
             fit: BoxFit.contain,
           ),
           const SizedBox(
-            width: 30,
+            width: 20,
           ),
-          Text(
-            title,
-            style: const TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600),
+            ),
           ),
         ],
       ),

@@ -3,6 +3,7 @@ import 'package:cp_groceries/common_widget/round_button.dart';
 import 'package:cp_groceries/view/login/login_view.dart';
 import 'package:cp_groceries/view/login/sign_up_view.dart';
 import 'package:cp_groceries/view/login/verification_view.dart';
+import 'package:cp_groceries/view/main_tabview/main_tabview.dart';
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -61,10 +62,10 @@ class _SignInViewState extends State<SignInView> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        "Get your groceries\nwith Peedia",
+                        "Get your groceries with\nCP Groceries",
                         style: TextStyle(
                           color: TColor.primaryText,
-                          fontSize: 26,
+                          fontSize: 24,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -82,6 +83,42 @@ class _SignInViewState extends State<SignInView> {
                         controller: txtMobile,
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.only(right: 3),
+                            child: IconButton(
+                              onPressed: () {
+                                if (txtMobile.text.isEmpty) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      dismissDirection: DismissDirection.up,
+                                      behavior: SnackBarBehavior.floating,
+                                      duration: const Duration(seconds: 1),
+                                      margin: EdgeInsets.only(
+                                          bottom: media.width * 1.4,
+                                          left: 20,
+                                          right: 20),
+                                      backgroundColor: Colors.red,
+                                      content: const Text(
+                                        'Please enter a Mobile number to continue.',
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const MainTabView(),
+                                    ),
+                                  );
+                                }
+                              },
+                              icon: const Icon(
+                                Icons.login_rounded,
+                                size: 34,
+                              ),
+                            ),
+                          ),
                           prefixIcon: GestureDetector(
                             onTap: () async {
                               final code = await countryPicker.showPicker(
@@ -136,10 +173,10 @@ class _SignInViewState extends State<SignInView> {
                   height: 25,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: RoundButton(
                     title: 'Sign In with Email',
-                    bgColor: const Color(0xff4A66AC),
+                    bgColor: Colors.green.shade600,
                     onPressed: () {
                       Get.to(() => const LogInView());
                     },
@@ -149,7 +186,7 @@ class _SignInViewState extends State<SignInView> {
                   height: 15,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: RoundButton(
                     title: 'Sign Up with Email',
                     onPressed: () {
@@ -158,7 +195,7 @@ class _SignInViewState extends State<SignInView> {
                   ),
                 ),
                 const SizedBox(
-                  height: 25,
+                  height: 20,
                 ),
                 Text(
                   "Or connect with social media",
@@ -169,14 +206,14 @@ class _SignInViewState extends State<SignInView> {
                   ),
                 ),
                 const SizedBox(
-                  height: 25,
+                  height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 35),
                   child: RoundIconButton(
                     title: 'Continue with Google',
                     icon: "assets/img/google_logo.png",
-                    bgColor: const Color(0xff4A66AC),
+                    bgColor: Colors.redAccent,
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -189,7 +226,7 @@ class _SignInViewState extends State<SignInView> {
                   height: 15,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 35),
                   child: RoundIconButton(
                     title: 'Continue with Facebook',
                     icon: "assets/img/fb_logo.png",
@@ -197,7 +234,32 @@ class _SignInViewState extends State<SignInView> {
                     onPressed: () {},
                   ),
                 ),
+                const SizedBox(
+                  height: 25,
+                ),
               ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+              top: media.width * 0.88, left: media.width * 0.58),
+          child: MaterialButton(
+            elevation: 5,
+            height: 24,
+            padding: const EdgeInsets.all(5),
+            color: Colors.amberAccent,
+            onPressed: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MainTabView(),
+                  ));
+            },
+            child: const Text(
+              "Login as Guest?",
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
             ),
           ),
         ),

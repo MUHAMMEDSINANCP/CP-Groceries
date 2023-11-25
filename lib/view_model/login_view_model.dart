@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginViewModel extends GetxController {
+
+
+     
+
   final txtEmail = TextEditingController().obs;
   final txtPassword = TextEditingController().obs;
   final isShowPassword = false.obs;
@@ -44,3 +48,4 @@ class LoginViewModel extends GetxController {
     isShowPassword.value = !isShowPassword.value;
   }
 }
+

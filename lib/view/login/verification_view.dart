@@ -33,7 +33,9 @@ class _VerificationViewState extends State<VerificationView> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             leading: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: Image.asset(
                 "assets/img/back.png",
                 width: 20,
@@ -68,7 +70,7 @@ class _VerificationViewState extends State<VerificationView> {
                         title: "Code",
                         placeholder: "- - - -"),
                     SizedBox(
-                      height: media.width * 0.3,
+                      height: media.width * 0.1,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -43,27 +43,38 @@ class _WelcomeViewState extends State<WelcomeView> {
               const SizedBox(
                 height: 8,
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Welcome\nto our store',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 48,
-                        fontWeight: FontWeight.w600),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: media.width * 0.26),
+                      child: const Text(
+                        'Welcome to\nCP Groceries',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
                   ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Get your groceries in as fast as one hour',
-                    style: TextStyle(
-                        color: const Color(0xffFCFCFC).withOpacity(0.7),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500),
+                  Expanded(
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: media.width * 0.09),
+                      child: Text(
+                        'Get your groceries in as fast as one hour',
+                        style: TextStyle(
+                            color: const Color(0xffFCFCFC).withOpacity(0.7),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
                   ),
                 ],
               ),

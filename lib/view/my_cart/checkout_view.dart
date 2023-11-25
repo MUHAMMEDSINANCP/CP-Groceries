@@ -160,16 +160,18 @@ class _CheckoutViewState extends State<CheckoutView> {
               ),
             ),
           ),
-          RoundButton(
-            title: "Place Order",
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const OrderAcceptView(),
-                ),
-              );
-            },
+          Expanded(
+            child: RoundButton(
+              title: "Place Order",
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const OrderAcceptView(),
+                  ),
+                );
+              },
+            ),
           ),
           const SizedBox(
             height: 15,

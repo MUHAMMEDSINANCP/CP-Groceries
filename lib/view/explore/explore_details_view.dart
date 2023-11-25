@@ -106,7 +106,7 @@ class _ExploreDetailViewState extends State<ExploreDetailView> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 0.80,
+            childAspectRatio: 0.71,
             crossAxisSpacing: 15,
             mainAxisSpacing: 15),
         itemCount: listArr.length,

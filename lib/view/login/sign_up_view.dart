@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cp_groceries/common_widget/line_textfield.dart';
+import 'package:cp_groceries/view/home/home_view.dart';
+import 'package:cp_groceries/view/main_tabview/main_tabview.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +17,39 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
-  TextEditingController txtUserName = TextEditingController();
-  TextEditingController txtEmail = TextEditingController();
-  TextEditingController txtPassword = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  // final nameController = TextEditingController();
+  final usernameController = TextEditingController();
+
+  Future<void> register() async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim());
+
+      String userId = userCredential.user!.uid;
+
+      await FirebaseFirestore.instance.collection('users').doc(userId).set(
+        {
+          'id': userId,
+          // 'name': nameController.text,
+          'username': usernameController.text,
+          'following': [],
+          'followers': [],
+        },
+      );
+
+      if (mounted) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const HomeView()));
+      }
+    } catch (e) {
+      print("Error: ${e.toString()}");
+      return;
+    }
+  }
 
   bool isShow = false;
 
@@ -91,7 +125,7 @@ class _SignUpViewState extends State<SignUpView> {
                       height: media.width * 0.1,
                     ),
                     LineTextField(
-                      controller: txtUserName,
+                      controller: usernameController,
                       title: "Username",
                       placeholder: "Enter your Username",
                     ),
@@ -99,7 +133,7 @@ class _SignUpViewState extends State<SignUpView> {
                       height: media.width * 0.07,
                     ),
                     LineTextField(
-                      controller: txtEmail,
+                      controller: emailController,
                       title: "Email",
                       placeholder: "Enter your email address",
                       keyboardType: TextInputType.emailAddress,
@@ -108,7 +142,7 @@ class _SignUpViewState extends State<SignUpView> {
                       height: media.width * 0.07,
                     ),
                     LineTextField(
-                      controller: txtPassword,
+                      controller: passwordController,
                       title: "Password",
                       placeholder: "Enter your password",
                       obscreText: isShow,
@@ -171,7 +205,13 @@ class _SignUpViewState extends State<SignUpView> {
                     ),
                     RoundButton(
                       title: "Sign Up",
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomeView()));
+                        register;
+                      },
                     ),
                     SizedBox(
                       height: media.width * 0.02,
