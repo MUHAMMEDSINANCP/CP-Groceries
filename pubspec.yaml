@@ -38,6 +38,8 @@ dependencies:
   flutter_easyloading: ^3.0.5
   flutter_rating_bar: ^4.0.1
   flutter_timezone: ^1.0.7
+  geocoding: ^2.1.1
+  geolocator: ^10.1.0
   get: ^4.6.6
   http: ^1.1.0
   shared_preferences: ^2.2.1

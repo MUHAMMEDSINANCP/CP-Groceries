@@ -1,7 +1,5 @@
-import 'dart:io';
 
 import 'package:cp_groceries/common/color_extensions.dart';
-import 'package:cp_groceries/common/my_http_overrides.dart';
 import 'package:cp_groceries/firebase_options.dart';
 import 'package:cp_groceries/view/main_tabview/main_tabview.dart';
 import 'package:cp_groceries/view/splash_view.dart';
@@ -18,7 +16,6 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  HttpOverrides.global = MyHttpOverrides();
 
   prefs = await SharedPreferences.getInstance();
   runApp(const MyApp());

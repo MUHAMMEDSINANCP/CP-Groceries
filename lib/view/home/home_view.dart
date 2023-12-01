@@ -2,6 +2,8 @@ import 'package:cp_groceries/common_widget/product_cell.dart';
 import 'package:cp_groceries/common_widget/section_view.dart';
 import 'package:cp_groceries/view/home/product_details_view.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../../common/color_extensions.dart';
 import '../../common_widget/category_cell.dart';
@@ -15,6 +17,33 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   TextEditingController txtSearch = TextEditingController();
+  String userLocation = '';
+  @override
+  void initState() {
+    super.initState();
+    getLocation();
+  }
+
+  Future<void> getLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+          position.latitude,
+          position.longitude); // Use placemarkFromCoordinates
+
+      setState(() {
+        userLocation = placemarks.first.subLocality ??
+            ''; // Update userLocation with the locality
+      });
+    } catch (e) {
+      // ignore: avoid_print
+      print("Error getting user's location: $e");
+      setState(() {
+        userLocation = 'Unknown'; // Default location if there's an error
+      });
+    }
+  }
 
   List exclusiveOfferArr = [
     {
@@ -134,7 +163,7 @@ class _HomeViewState extends State<HomeView> {
                     width: 8,
                   ),
                   Text(
-                    "Pulliyode, Kadirur",
+                    userLocation.isNotEmpty ? userLocation : 'Unknown',
                     style: TextStyle(
                       color: TColor.darkGray,
                       fontSize: 18,

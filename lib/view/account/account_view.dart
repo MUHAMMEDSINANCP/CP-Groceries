@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cp_groceries/common/color_extensions.dart';
 import 'package:cp_groceries/common_widget/account_row.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AccountView extends StatefulWidget {
@@ -10,6 +12,30 @@ class AccountView extends StatefulWidget {
 }
 
 class _AccountViewState extends State<AccountView> {
+  String userName = "";
+  String userEmail = "";
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserName();
+  }
+
+  void fetchUserName() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      setState(() {
+        userName = userSnapshot['name'];
+        userEmail = user.email ?? "";
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +67,7 @@ class _AccountViewState extends State<AccountView> {
                           Row(
                             children: [
                               Text(
-                                "Sinan CP",
+                                userName,
                                 style: TextStyle(
                                   color: TColor.primaryText,
                                   fontSize: 20,
@@ -59,7 +85,7 @@ class _AccountViewState extends State<AccountView> {
                             ],
                           ),
                           Text(
-                            "cpmuhammedsinan@gmail.com",
+                            userEmail,
                             style: TextStyle(
                               color: TColor.secondaryText,
                               fontSize: 16,

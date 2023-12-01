@@ -9,6 +9,7 @@ class LineTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final Widget? right;
   final bool obscreText;
+  final String? Function(String?)? validator;
 
   const LineTextField(
       {super.key,
@@ -17,7 +18,8 @@ class LineTextField extends StatelessWidget {
       required this.placeholder,
       this.right,
       this.keyboardType,
-      this.obscreText = false});
+      this.obscreText = false,
+      this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +35,9 @@ class LineTextField extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        TextField(
+        TextFormField(
           controller: controller,
+          validator: validator,
           keyboardType: keyboardType,
           obscureText: obscreText,
           decoration: InputDecoration(
