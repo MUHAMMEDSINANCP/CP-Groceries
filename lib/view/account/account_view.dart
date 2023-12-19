@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cp_groceries/common/color_extensions.dart';
 import 'package:cp_groceries/common_widget/account_row.dart';
+import 'package:cp_groceries/view/login/login_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -146,7 +147,7 @@ class _AccountViewState extends State<AccountView> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     MaterialButton(
-                      onPressed: () {},
+                      onPressed: confirmLogout,
                       height: 60,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(19)),
@@ -186,6 +187,77 @@ class _AccountViewState extends State<AccountView> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> confirmLogout() async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(
+            child: RichText(
+              text: TextSpan(
+                style: const TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.black, // Default color for text
+                ),
+                children: <TextSpan>[
+                  const TextSpan(
+                    text: 'Logout from ',
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                  TextSpan(
+                    text: 'CP Groceries',
+                    style: TextStyle(
+                      color: TColor.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          content: const Text('Are you sure you want to logout?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+            TextButton(
+              onPressed: () async {
+                // Perform logout logic here
+                await FirebaseAuth.instance.signOut();
+
+                if (mounted) {
+                  Navigator.of(context).pop();
+                }
+
+                if (mounted) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LogInView(),
+                    ),
+                  );
+                }
+              },
+              child: Text(
+                'Logout',
+                style: TextStyle(
+                  color: TColor.primary,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

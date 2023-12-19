@@ -79,53 +79,68 @@ class _MainTabViewState extends State<MainTabView>
             unselectedLabelColor: TColor.primaryText,
             unselectedLabelStyle: TextStyle(
               color: TColor.primaryText,
-              fontSize: 12,
+              fontSize: 9,
               fontWeight: FontWeight.w600,
             ),
             tabs: [
               Tab(
                 text: "Shop",
-                icon: Image.asset(
-                  "assets/img/store_tab.png",
-                  width: 25,
-                  height: 25,
-                  color: selectTab == 0 ? TColor.primary : TColor.primaryText,
+                icon: Tooltip(
+                  message: "Shop",
+                  child: Image.asset(
+                    "assets/img/store_tab.png",
+                    width: 25,
+                    height: 25,
+                    color: selectTab == 0 ? TColor.primary : TColor.primaryText,
+                  ),
                 ),
               ),
               Tab(
                 text: "Explore",
-                icon: Image.asset(
-                  "assets/img/explore_tab.png",
-                  width: 25,
-                  height: 25,
-                  color: selectTab == 1 ? TColor.primary : TColor.primaryText,
+                icon: Tooltip(
+                  message: "Explore",
+                  child: Image.asset(
+                    "assets/img/explore_tab.png",
+                    width: 25,
+                    height: 25,
+                    color: selectTab == 1 ? TColor.primary : TColor.primaryText,
+                  ),
                 ),
               ),
               Tab(
                 text: "Cart",
-                icon: Image.asset(
-                  "assets/img/cart_tab.png",
-                  width: 25,
-                  height: 25,
-                  color: selectTab == 2 ? TColor.primary : TColor.primaryText,
+                icon: Tooltip(
+                  message: "View Cart",
+                  child: Image.asset(
+                    "assets/img/cart_tab.png",
+                    width: 25,
+                    height: 25,
+                    color: selectTab == 2 ? TColor.primary : TColor.primaryText,
+                  ),
                 ),
               ),
               Tab(
                 text: "Favourite",
-                icon: Image.asset(
-                  "assets/img/fav_tab.png",
-                  width: 25,
-                  height: 25,
-                  color: selectTab == 3 ? TColor.primary : TColor.primaryText,
+                icon: Tooltip(
+                  message: "Favourites",
+                  child: Image.asset(
+                    "assets/img/fav_tab.png",
+                    width: 25,
+                    height: 25,
+                    color: selectTab == 3 ? TColor.primary : TColor.primaryText,
+                  ),
                 ),
               ),
               Tab(
                 text: "Account",
-                icon: Image.asset(
-                  "assets/img/account_tab.png",
-                  width: 25,
-                  height: 25,
-                  color: selectTab == 4 ? TColor.primary : TColor.primaryText,
+                icon: Tooltip(
+                  message: "Account",
+                  child: Image.asset(
+                    "assets/img/account_tab.png",
+                    width: 25,
+                    height: 25,
+                    color: selectTab == 4 ? TColor.primary : TColor.primaryText,
+                  ),
                 ),
               ),
             ],

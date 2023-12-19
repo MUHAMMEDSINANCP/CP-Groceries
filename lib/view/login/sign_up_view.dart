@@ -125,16 +125,18 @@ class _SignUpViewState extends State<SignUpView> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Image.asset(
-                "assets/img/back.png",
-                width: 20,
-                height: 20,
-              ),
-            ),
+            automaticallyImplyLeading: false,
+
+            // leading: IconButton(
+            //   onPressed: () {
+            //     Navigator.pop(context);
+            //   },
+            //   icon: Image.asset(
+            //     "assets/img/back.png",
+            //     width: 20,
+            //     height: 20,
+            //   ),
+            // ),
           ),
           backgroundColor: Colors.transparent,
           body: SafeArea(
