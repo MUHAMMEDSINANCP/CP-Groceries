@@ -42,6 +42,7 @@ dependencies:
   geolocator: ^10.1.0
   get: ^4.6.6
   http: ^1.1.0
+  permission_handler: 
   shared_preferences: ^2.2.1
 
 dependency_overrides:
