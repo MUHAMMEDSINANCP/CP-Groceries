@@ -25,3 +25,4 @@ If you have any feedback, please reach out to me at cpmuhammedsinan@gmail.com.. 
 ### Technologies Used :
 Firebase Auth, Firebase Database, Mobile Authentication, GetX State Management, MVVM Architecture
 
+ 
