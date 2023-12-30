@@ -40,6 +40,8 @@ dependencies:
   flutter_timezone: ^1.0.7
   geocoding: ^2.1.1
   geolocator: ^10.1.0
+  form_field_validator: ^1.1.0
+  gap:
   get: ^4.6.6
   http: ^1.1.0
   permission_handler: 

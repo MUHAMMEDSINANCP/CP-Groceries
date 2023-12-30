@@ -5,6 +5,8 @@ import '../../common/color_extensions.dart';
 import '../../common_widget/line_textfield.dart';
 import '../../common_widget/round_button.dart';
 import '../main_tabview/main_tabview.dart';
+import 'package:gap/gap.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class LogInView extends StatefulWidget {
   const LogInView({super.key});
@@ -154,16 +156,14 @@ class _LogInViewState extends State<LogInView> {
                         height: media.width * 0.15,
                       ),
                       Text(
-                        "Loging",
+                        "Login",
                         style: TextStyle(
                           color: TColor.primaryText,
                           fontSize: 26,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(
-                        height: media.width * 0.03,
-                      ),
+                      const Gap(10),
                       Text(
                         "Enter your email and password",
                         style: TextStyle(
@@ -181,12 +181,10 @@ class _LogInViewState extends State<LogInView> {
                         title: "Email",
                         placeholder: "Enter your email address",
                         keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please enter your email.";
-                          }
-                          return null;
-                        },
+                        validator: MultiValidator([
+                          RequiredValidator(
+                              errorText: 'Please enter your email.'),
+                        ]),
                       ),
                       SizedBox(
                         height: media.width * 0.05,
@@ -215,12 +213,11 @@ class _LogInViewState extends State<LogInView> {
                             ),
                           ),
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please enter your password.";
-                          }
-                          return null;
-                        },
+
+                        validator: MultiValidator([
+                          RequiredValidator(
+                              errorText: 'Please enter your password.'),
+                        ]),
                       ),
                       SizedBox(
                         height: media.width * 0.07,

@@ -4,6 +4,7 @@ import 'package:cp_groceries/view/main_tabview/main_tabview.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 import '../../common/color_extensions.dart';
 import '../../common_widget/round_button.dart';
@@ -185,13 +186,11 @@ class _SignUpViewState extends State<SignUpView> {
                       LineTextField(
                         controller: nameController,
                         title: "Name",
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please enter your name.";
-                          }
-                          return null;
-                        },
                         placeholder: "Enter your name",
+                        validator: MultiValidator([
+                          RequiredValidator(
+                              errorText: 'Please enter your name.'),
+                        ]),
                       ),
                       SizedBox(
                         height: media.width * 0.07,
@@ -200,12 +199,10 @@ class _SignUpViewState extends State<SignUpView> {
                         controller: emailController,
                         title: "Email",
                         placeholder: "Enter your email address",
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please enter your email.";
-                          }
-                          return null;
-                        },
+                        validator: MultiValidator([
+                          RequiredValidator(
+                              errorText: 'Please enter your email.'),
+                        ]),
                         keyboardType: TextInputType.emailAddress,
                       ),
                       SizedBox(
@@ -216,12 +213,15 @@ class _SignUpViewState extends State<SignUpView> {
                         title: "Password",
                         placeholder: "Enter your password",
                         obscreText: !isPasswordVisible,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Create a password.";
-                          }
-                          return null;
-                        },
+                        validator: MultiValidator([
+                          RequiredValidator(errorText: 'password is required'),
+                          MinLengthValidator(8,
+                              errorText:
+                                  'password must be at least 8 digits long'),
+                          PatternValidator(r'(?=.*?[#?!@$%^&*-])',
+                              errorText:
+                                  'passwords must have at least one special character')
+                        ]),
                         right: GestureDetector(
                           onTap: () {
                             setState(() {
